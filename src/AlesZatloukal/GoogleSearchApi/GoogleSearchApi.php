@@ -20,6 +20,13 @@ class GoogleSearchApi
      * @var string
      */
     protected $apiKey;
+    
+    /**
+     * Google Custom Search JSON API url
+     *
+     * @var string
+     */
+    protected $apiUrl;
 
     /**
      * Original response converted to array
@@ -35,10 +42,12 @@ class GoogleSearchApi
      *
      * @param $engineId
      * @param $apiKey
+     * @param $apiUrl
      */
     public function __construct() {
         $this->engineId = config('googlesearchapi.google_search_engine_id');
         $this->apiKey = config('googlesearchapi.google_search_api_key');
+        $this->apiUrl = config('googlesearchapi.google_search_api_url');
     }
 
     /**
@@ -57,6 +66,15 @@ class GoogleSearchApi
      */
     public function setApiKey($apiKey) {
         $this->apiKey = $apiKey;
+    }
+    
+    /**
+     * Setter for apiUrl, overrides the value from config
+     *
+     * @param $apiUrl
+     */
+    public function setApiUrl($apiUrl) {
+        $this->apiUrl = $apiUrl;
     }
 
     /**
@@ -120,7 +138,7 @@ class GoogleSearchApi
          */
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/customsearch/v1/siterestrict" . $searchArray);
+        curl_setopt($ch, CURLOPT_URL, $this->apiUrl . $searchArray);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
