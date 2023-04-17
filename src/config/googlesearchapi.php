@@ -23,7 +23,10 @@ return [
      *
      * !! Attention !! It can take some time to API key will be authorized, wait 10 mins before starting to use it
      */
-    'google_search_api_key' => function_exists('env') ? env('GOOGLE_SEARCH_API_KEY', '') : ''
+    'google_search_api_key' => function_exists('env') ? env('GOOGLE_SEARCH_API_KEY', '') : '',
     
+     /**
+     * Url for the API request.
+     */
     'google_search_api_url' => function_exists('env') ? env('GOOGLE_SEARCH_API_KEY', '') : 'https://www.googleapis.com/customsearch/v1'
 ];
